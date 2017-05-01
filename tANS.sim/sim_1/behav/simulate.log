@@ -1,0 +1,3 @@
+Vivado Simulator 2015.4
+Time resolution is 1 ps
+$finish called at time : 110 ns : File "/home/joanna/Programowanie/FPGA/Projekty/tANS/tANS.srcs/sim_1/new/encoder_tb.v" Line 45

@@ -1,0 +1,10 @@
+#todo
+1. ROM w enkoderze
+2. ostatni stan na wyjściu
+3. koniec przetwarzania bloku symboli
+4. dekoder
+5. rozszerzenie alfabetu
+6. parametryzacja
+7. ostateczny testbench
+
+Do każdego kroku testowanie.
