@@ -7,7 +7,8 @@ module encoder(
     input en,
     input [7:0] symbol,
     output [7:0] data_out,
-    output done_byte
+    output done_byte,
+    output [7:0] next_state
     );
     
     wire [7:0] state, data_valid;
@@ -20,7 +21,8 @@ module encoder(
         .symbol(symbol),
         .state(state),
         .data_valid(data_valid),
-        .nb_bits(nb_bits)
+        .nb_bits(nb_bits),
+        .next_state(next_state)
     );
     
     bits_processor bits_processor_inst(

@@ -8,7 +8,8 @@ module preprocessor(
     input [7:0] symbol,
     output [7:0] state,
     output [7:0] data_valid,
-    output [3:0] nb_bits
+    output [3:0] nb_bits,
+    output [7:0] next_state
     );
     
     nb_bits_calculator nb_bits_calculator_inst(
@@ -28,7 +29,8 @@ module preprocessor(
         .en(en),
         .symbol(symbol),
         .nb_bits(nb_bits),
-        .state(state)
+        .state(state),
+        .next_state(next_state)
     );
     
 endmodule
