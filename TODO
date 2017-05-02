@@ -1,10 +1,12 @@
 #todo
 1. ROM w enkoderze
-2. ostatni stan na wyjściu
-3. koniec przetwarzania bloku symboli
-4. dekoder
-5. rozszerzenie alfabetu
-6. parametryzacja
-7. ostateczny testbench
+2. ostatni stan na wyjściu - zrobione
+3. koniec przetwarzania bloku symboli - wstępnie zrobione
+4. scenariusz: ciąg symboli nie generuje ciągu bitów podzielnego przez 8 (czyli ostatni bajt nie jest dokończony)
+5. dekoder
+6. stan wejściowy (ustalony dla enkodera, zmienny dla dekodera!) -> musi być już zrobiony ROM
+7. rozszerzenie alfabetu
+8. parametryzacja
+9. ostateczny testbench
 
 Do każdego kroku testowanie.
