@@ -28,7 +28,7 @@ module top_encoder(
         .symbol(symbol),
         .data_out(data_out),
         .done_byte(byte_done),
-        .next_state(last_state)
+        .state(last_state)
     );
     
 endmodule

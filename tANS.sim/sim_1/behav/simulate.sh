@@ -9,4 +9,4 @@ then
 exit $RETVAL
 fi
 }
-ExecStep $xv_path/bin/xsim encoder_tb_behav -key {Behavioral:sim_1:Functional:encoder_tb} -tclbatch encoder_tb.tcl -log simulate.log
+ExecStep $xv_path/bin/xsim top_encoder_tb_behav -key {Behavioral:sim_1:Functional:top_encoder_tb} -tclbatch top_encoder_tb.tcl -log simulate.log

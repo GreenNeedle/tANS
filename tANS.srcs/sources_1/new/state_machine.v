@@ -7,11 +7,11 @@ module state_machine(
     input en,
     input [7:0] symbol,
     input [3:0] nb_bits,
-    output [7:0] state,
-    output [7:0] next_state
+    output [7:0] state
     );
     
     wire [7:0] start;
+    wire [7:0] next_state;
     wire [3:0] address;
     
     start_rom start_rom_inst(

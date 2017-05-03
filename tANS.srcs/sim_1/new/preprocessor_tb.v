@@ -7,7 +7,6 @@ module preprocessor_tb();
     reg [7:0] symbol;
     wire [7:0] state, data_valid;
     wire [3:0] nb_bits;
-    wire [7:0] next_state;
     
     initial begin
         CLK = 1;
@@ -45,8 +44,7 @@ module preprocessor_tb();
         .symbol(symbol),
         .state(state),
         .data_valid(data_valid),
-        .nb_bits(nb_bits),
-        .next_state(next_state)
+        .nb_bits(nb_bits)
     );
 
 endmodule

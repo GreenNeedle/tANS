@@ -2,12 +2,12 @@
 # Webtalk v2015.4 (64-bit)
 # SW Build 1412921 on Wed Nov 18 09:44:32 MST 2015
 # IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
-# Start of session at: Fri Apr 21 09:33:42 2017
-# Process ID: 3689
-# Current directory: /home/joanna/Programowanie/FPGA/Projekty/tANS/tANS.sim/sim_1/behav
-# Command line: wbtcv -mode batch -source /home/joanna/Programowanie/FPGA/Projekty/tANS/tANS.sim/sim_1/behav/xsim.dir/encoder_tb_behav/webtalk/xsim_webtalk.tcl -notrace
-# Log file: /home/joanna/Programowanie/FPGA/Projekty/tANS/tANS.sim/sim_1/behav/webtalk.log
-# Journal file: /home/joanna/Programowanie/FPGA/Projekty/tANS/tANS.sim/sim_1/behav/webtalk.jou
+# Start of session at: Wed May  3 11:18:23 2017
+# Process ID: 3796
+# Current directory: /home/joanna/Programowanie/FPGA/Projekty/test/tANS/tANS.sim/sim_1/behav
+# Command line: wbtcv -mode batch -source /home/joanna/Programowanie/FPGA/Projekty/test/tANS/tANS.sim/sim_1/behav/xsim.dir/top_encoder_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/joanna/Programowanie/FPGA/Projekty/test/tANS/tANS.sim/sim_1/behav/webtalk.log
+# Journal file: /home/joanna/Programowanie/FPGA/Projekty/test/tANS/tANS.sim/sim_1/behav/webtalk.jou
 #-----------------------------------------------------------
-source /home/joanna/Programowanie/FPGA/Projekty/tANS/tANS.sim/sim_1/behav/xsim.dir/encoder_tb_behav/webtalk/xsim_webtalk.tcl -notrace
-INFO: [Common 17-206] Exiting Webtalk at Fri Apr 21 09:33:42 2017...
+source /home/joanna/Programowanie/FPGA/Projekty/test/tANS/tANS.sim/sim_1/behav/xsim.dir/top_encoder_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Wed May  3 11:18:23 2017...

@@ -8,10 +8,10 @@ module encoder(
     input [7:0] symbol,
     output [7:0] data_out,
     output done_byte,
-    output [7:0] next_state
+    output [7:0] state
     );
     
-    wire [7:0] state, data_valid;
+    wire [7:0] data_valid;
     wire [2:0] nb_bits;
     
     preprocessor preprocessor_inst(
@@ -21,8 +21,7 @@ module encoder(
         .symbol(symbol),
         .state(state),
         .data_valid(data_valid),
-        .nb_bits(nb_bits),
-        .next_state(next_state)
+        .nb_bits(nb_bits)
     );
     
     bits_processor bits_processor_inst(

@@ -1,7 +1,7 @@
 #todo
 1. ROM w enkoderze
 2. ostatni stan na wyjściu - zrobione
-3. koniec przetwarzania bloku symboli - wstępnie zrobione
+3. koniec przetwarzania bloku symboli - zrobiony zarys
 4. scenariusz: ciąg symboli nie generuje ciągu bitów podzielnego przez 8 (czyli ostatni bajt nie jest dokończony)
 5. dekoder
 6. stan wejściowy (ustalony dla enkodera, zmienny dla dekodera!) -> musi być już zrobiony ROM

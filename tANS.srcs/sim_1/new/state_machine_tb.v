@@ -7,7 +7,6 @@ module state_machine_tb();
     reg [7:0] symbol;
     reg [3:0] nb_bits;
     wire [7:0] state;
-    wire [7:0] next_state;
     
     initial begin
         CLK = 1;
@@ -55,8 +54,7 @@ module state_machine_tb();
         .en(en),
         .symbol(symbol),
         .nb_bits(nb_bits),
-        .state(state),
-        .next_state(next_state)
+        .state(state)
     );
 
 endmodule
