@@ -6,7 +6,8 @@ module encoder_tb();
     reg CLK, clr, en;
     reg [7:0] symbol;
     wire [7:0] data_out;
-    wire done_byte;
+    wire byte_done, symbols_done;
+    wire [2:0] valid_bits;
     
     initial begin
         CLK = 1;
@@ -55,7 +56,9 @@ module encoder_tb();
         .en(en),
         .symbol(symbol),
         .data_out(data_out),
-        .done_byte(done_byte)
+        .byte_done(byte_done),
+        .symbols_done(symbols_done),
+        .valid_bits(valid_bits)
     );
 
 endmodule

@@ -7,6 +7,7 @@ module top_encoder_tb();
     reg [7:0] symbol;
     wire [7:0] data_out;
     wire byte_done, symbols_done;
+    wire [2:0] valid_bits;
     wire [7:0] symbols_count;
     wire [7:0] last_state;
     
@@ -62,6 +63,7 @@ module top_encoder_tb();
         .data_out(data_out),
         .byte_done(byte_done),
         .symbols_done(symbols_done),
+        .valid_bits(valid_bits),
         .symbols_count(symbols_count),
         .last_state(last_state)
     );

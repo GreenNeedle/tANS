@@ -7,7 +7,9 @@ module encoder(
     input en,
     input [7:0] symbol,
     output [7:0] data_out,
-    output done_byte,
+    output byte_done,
+    output symbols_done,
+    output [2:0] valid_bits,
     output [7:0] state
     );
     
@@ -32,7 +34,9 @@ module encoder(
         .data_valid(data_valid),
         .nb_bits(nb_bits),
         .data_out(data_out),
-        .done_byte(done_byte)
+        .byte_done(byte_done),
+        .symbols_done(symbols_done),
+        .valid_bits(valid_bits)
     );
     
 endmodule

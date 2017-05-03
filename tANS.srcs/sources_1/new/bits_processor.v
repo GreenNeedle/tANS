@@ -9,10 +9,11 @@ module bits_processor(
     input [7:0] data_valid,
     input [2:0] nb_bits,
     output [7:0] data_out,
-    output done_byte
+    output byte_done,
+    output symbols_done,
+    output [2:0] valid_bits
     );
     
-    wire [2:0] valid_bits;
     wire done;
     wire [15:0] new_bits;
     
@@ -36,9 +37,11 @@ module bits_processor(
         .CLK(CLK),
         .clr(clr),
         .en(!done),
+        .finish(!en),
         .new_bits(new_bits),
         .data_out(data_out),
-        .done_byte(done_byte)
+        .byte_done(byte_done),
+        .symbols_done(symbols_done)
     );
     
 endmodule

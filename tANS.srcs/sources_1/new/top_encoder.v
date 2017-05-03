@@ -9,25 +9,30 @@ module top_encoder(
     output [7:0] data_out,
     output byte_done,
     output symbols_done,
+    output [2:0] valid_bits,
     output [7:0] symbols_count,
     output [7:0] last_state
     );
+    
+    wire done;
     
     symbols_counter #(.MAX(9)) symbols_counter_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
         .symbols_count(symbols_count),
-        .symbols_done(symbols_done)
+        .symbols_done(done)
     );
     
     encoder encoder_inst(
         .CLK(CLK),
         .clr(clr),
-        .en(!symbols_done),
+        .en(!done),
         .symbol(symbol),
         .data_out(data_out),
-        .done_byte(byte_done),
+        .byte_done(byte_done),
+        .symbols_done(symbols_done),
+        .valid_bits(valid_bits),
         .state(last_state)
     );
     
