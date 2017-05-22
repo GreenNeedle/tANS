@@ -9,35 +9,35 @@ module bits_counter_tb();
     wire done;
     
     initial begin
-        CLK = 1;
-        clr = 1;
-        en = 1;
-        nb_bits = 1;
+        CLK <= 1;
+        clr <= 1;
+        en <= 1;
+        nb_bits <= 1;
         #3
         
-        clr = 0;
+        clr <= 0;
         #17
         
-        nb_bits = 2;
+        nb_bits <= 2;
         #10
         
-        nb_bits = 5;
+        nb_bits <= 5;
         #10
         
-        nb_bits = 4;
+        nb_bits <= 4;
         #10
         
-        nb_bits = 7;
+        nb_bits <= 7;
         #10
         
-        nb_bits = 3;
+        nb_bits <= 3;
         #10
         
         $finish;
     end
     
     always begin
-        #5 CLK = ~CLK;
+        #5 CLK <= ~CLK;
     end
     
     bits_counter bits_counter_inst(

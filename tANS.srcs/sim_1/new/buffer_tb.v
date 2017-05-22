@@ -9,49 +9,49 @@ module buffer_tb();
     wire byte_done, symbols_done;
     
     initial begin
-        CLK = 1;
-        clr = 1;
-        en = 1;
-        new_bits = 16'b0000000000000000;
+        CLK <= 1;
+        clr <= 1;
+        en <= 1;
+        new_bits <= 16'b0000000000000000;
         #3
         
-        clr = 0;
+        clr <= 0;
         #27
         
-        new_bits = 16'b0000000000000100;
+        new_bits <= 16'b0000000000000100;
         #10
         
-        new_bits = 16'b0000000000010000;
+        new_bits <= 16'b0000000000010000;
         #10
         
-        new_bits = 16'b0000000000000000;
+        new_bits <= 16'b0000000000000000;
         #10
         
-        new_bits = 16'b0000000011000000;
+        new_bits <= 16'b0000000011000000;
         #10
         
-        en = 0;
-        new_bits = 16'b0000000000000010;
+        en <= 0;
+        new_bits <= 16'b0000000000000010;
         #10  
         
-        en = 1;
-        new_bits = 16'b0000000000000100;
+        en <= 1;
+        new_bits <= 16'b0000000000000100;
         #10
               
-        new_bits = 16'b0000000000010000;
+        new_bits <= 16'b0000000000010000;
         #10
               
-        new_bits = 16'b0000000000000000;
+        new_bits <= 16'b0000000000000000;
         #10
               
-        new_bits = 16'b0000000011000000;
+        new_bits <= 16'b0000000011000000;
         #10
         
         $finish;
     end
     
     always begin
-        #5 CLK = ~CLK;
+        #5 CLK <= ~CLK;
     end
     
     buffer buffer_inst(

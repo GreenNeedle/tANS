@@ -8,23 +8,23 @@ module symbols_counter_tb();
     wire symbols_done;
     
     initial begin
-        CLK = 1;
-        clr = 1;
-        en = 1;
+        CLK <= 1;
+        clr <= 1;
+        en <= 1;
         
-        #17 clr = 0;
+        #17 clr <= 0;
         #3
     
-        #40 en = 0;
-        #10 en = 1;
+        #40 en <= 0;
+        #10 en <= 1;
         
         #50
-        
+                
         $finish;
     end
     
     always begin
-        #5 CLK = ~CLK;
+        #5 CLK <= ~CLK;
     end
     
     symbols_counter #(.MAX(4)) symbol_counter_inst(

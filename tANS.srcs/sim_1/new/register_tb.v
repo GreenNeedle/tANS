@@ -8,30 +8,30 @@ module register_tb();
     wire [7:0] out;
     
     initial begin
-        CLK = 1;
-        clr = 0;
-        en = 0;
-        in = 10;
+        CLK <= 1;
+        clr <= 0;
+        en <= 0;
+        in <= 10;
         #10
         
-        clr = 1;
-        en = 1;
+        clr <= 1;
+        en <= 1;
         #10
         
-        clr = 0;
+        clr <= 0;
         #10
         
-        in = 15;
+        in <= 15;
         #10
         
-        in = 3;
+        in <= 3;
         #10
         
         $finish;
     end
     
     always begin
-        #5 CLK = ~CLK;
+        #5 CLK <= ~CLK;
     end
     
     register register_inst(

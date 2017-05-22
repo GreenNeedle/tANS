@@ -9,32 +9,32 @@ module preprocessor_tb();
     wire [3:0] nb_bits;
     
     initial begin
-        CLK = 1;
-        clr = 1;
-        en = 1;
-        symbol = 8'b00110010;
+        CLK <= 1;
+        clr <= 1;
+        en <= 1;
+        symbol <= 8'b00110010;
         #3  
         
-        clr = 0;
+        clr <= 0;
         #7
         
-        symbol = 8'b00110001;
+        symbol <= 8'b00110001;
         #10
         
-        symbol = 8'b00110010;
+        symbol <= 8'b00110010;
         #10
         
-        symbol = 8'b00110001;
+        symbol <= 8'b00110001;
         #20
         
-        symbol = 8'b00110000;
+        symbol <= 8'b00110000;
         #10
     
         $finish;
     end
     
     always begin
-        #5 CLK = ~CLK;
+        #5 CLK <= ~CLK;
     end
     
     preprocessor preprocessor_inst(
