@@ -17,57 +17,43 @@ def write_module(file_target, module_name, input_name, input_length, output_name
     file_target.write("\n")
 
 
-def create_nb_ROM():
-    module_name = "nb_rom"
-    file_ext = ".v"
+def create_ROM(module_name, file_ext, input_name, input_length, output_name, output_length):
     file_target = module_name + file_ext
 
-    nb_ROM = open(file_target, "a+")
+    rom_file = open(file_target, "a+")
 
     write_timescale(file_target, 1, 1)
-    nb_ROM.write("\n\n")
+    rom_file.write("\n\n")
 
-    write_module(nb_ROM, module_name, "symbol", 8, "nb", 8);
+    write_module(rom_file, module_name, input_name, input_length, output_name, output_length);
 
-    nb_ROM.write("    reg [7:0] nb_reg;\n")
-    nb_ROM.write("\n")
+    rom_file.write("    reg [" + str(output_length - 1) + ":0] " + output_name + "_reg;\n")
+    rom_file.write("\n")
 
-    nb_ROM.write("    always @ (symbol) begin\n" + \
-                 "        case(symbol):\n")
+    rom_file.write("    always @ (" + input_name + ") begin\n" + \
+                 "        case(" + input_name + "):\n")
 
-    with open("nb.txt", "r") as nb_table:
-        for line_number, nb_val in enumerate(nb_table, 1):
+    with open(output_name + ".txt", "r") as table:
+        for line_number, val in enumerate(table, 1):
             symbol = line_number - 1 + ord('0')
-            nb_ROM.write("            {0:08b}".format(symbol) + " : begin\n" + \
-                         "                nb_reg = " + nb_val.strip() + ";\n")
+            rom_file.write("            {0:08b}".format(symbol) + " : begin\n" + \
+                         "                " + output_name + "_reg = " + val.strip() + ";\n")
 
-    nb_ROM.write("        endcase\n" + \
+    rom_file.write("        endcase\n" + \
                  "    end\n")
-    nb_ROM.write("\n")
+    rom_file.write("\n")
 
-    nb_ROM.write("    assign nb = nb_reg;\n")
-    nb_ROM.write("\n")
+    rom_file.write("    assign " + output_name + " = " + output_name + "_reg;\n")
+    rom_file.write("\n")
 
-    nb_ROM.write("endmodule\n")
+    rom_file.write("endmodule\n")
 
-    nb_ROM.close()
-
-
-def create_start_ROM():
-    pass
-
-
-def create_encoding_ROM():
-    pass
-
-
-def create_decoding_ROM():
-    pass
+    rom_file.close()
 
 
 def main(argv):
     print("Hello!")
-    create_nb_ROM()
+    create_ROM("nb_rom", ".v", "symbol", 8, "nb", 8)
     print("Bye!")
 
 
