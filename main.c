@@ -127,7 +127,7 @@ void prepare_decoding(char* symbol, struct decoding_table* decoding_table)
 
 void write_nb_table(int* nb)
 {
-    FILE *fp = fopen("nb.txt", "w");
+    FILE* fp = fopen("nb.txt", "w");
     for (int i = 0; i < m; i++) {
         char binary[m];
         parse_char_to_binary((char)(nb[i]), binary);
@@ -142,7 +142,7 @@ void write_nb_table(int* nb)
 void write_start_table(int* start)
 {
     //7 bits + 1 for sign (the oldest); 1 - negative, 0 - positive
-    FILE *fp = fopen("start.txt", "w");
+    FILE* fp = fopen("start.txt", "w");
     for (int i = 0; i < m; i++) {
         char binary[m];
         parse_char_to_binary((char)(start[i]), binary);
@@ -156,7 +156,7 @@ void write_start_table(int* start)
 
 void write_encoding_table(int* encoding_table)
 {
-    FILE *fp = fopen("encoding.txt", "w");
+    FILE* fp = fopen("encoding.txt", "w");
     for (int i = 0; i < L; i++) {
         char binary[8];
         parse_char_to_binary((char)(encoding_table[i]), binary);
@@ -169,7 +169,7 @@ void write_encoding_table(int* encoding_table)
 
 void write_decoding_table(struct decoding_table *decoding_table)
 {
-    FILE *fp = fopen("decoding.txt", "w");
+    FILE* fp = fopen("decoding.txt", "w");
     for (int X = 0; X < L; X++) {
         char binary[8];
         parse_char_to_binary(decoding_table[X].symbol, binary);
@@ -193,8 +193,9 @@ void write_decoding_table(struct decoding_table *decoding_table)
 int main()
 {
     char symbol[] = {'1', '1', '0', '2', '2', '1', '0', '2', '1', '0', '2', '1', '2', '1', '1', '1'};
+
     /*spread(symbol);
-    for(int i  = 0; i < L; i++)
+    for (int i  = 0; i < L; i++)
         printf("%c ", symbol[i]);
     printf("\n");*/
 
