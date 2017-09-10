@@ -207,6 +207,7 @@ int main()
 
     for(int i = 0; i < m; i++)
         printf("%d ", start[i]);
+    printf("\n");
 
     write_decoding_table(decoding_table);
     write_nb_table(nb);
