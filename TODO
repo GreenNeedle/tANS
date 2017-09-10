@@ -1,12 +1,11 @@
 #todo
-1. ROM w enkoderze
-2. ostatni stan na wyjściu - zrobione
-3. koniec przetwarzania bloku symboli - zrobione
-4. scenariusz: ciąg symboli nie generuje ciągu bitów podzielnego przez 8 (czyli ostatni bajt nie jest dokończony) - zrobione
-5. dekoder
-6. stan wejściowy (ustalony dla enkodera, zmienny dla dekodera!) -> musi być już zrobiony ROM
-7. rozszerzenie alfabetu
-8. parametryzacja
-9. ostateczny testbench
+1. ROM w enkoderze:
+    - generacja plików verilogowych,
+    - zmiana w enkoderze (osobny moduł nb_bits_calculator).
+2. Szerokość nb_bits w enkoderze.
+3. Parametryzacja.
+4. Dekoder.
+5. Stan wejściowy (ustalony dla enkodera, zmienny dla dekodera!) -> musi być już zrobiony ROM.
+6. Rozszerzenie alfabetu.
+7. Ostateczny testbench.
 
-Do każdego kroku testowanie.
