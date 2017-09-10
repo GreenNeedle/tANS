@@ -11,9 +11,16 @@ module preprocessor(
     output [3:0] nb_bits
     );
     
-    nb_bits_calculator nb_bits_calculator_inst(
+    wire [7:0] nb;
+    
+    nb_rom nb_rom_inst(
         .symbol(symbol),
+        .nb(nb)
+    );
+    
+    nb_bits_calculator nb_bits_calculator_inst(
         .state(state),
+        .nb(nb),
         .nb_bits(nb_bits)
     );
     
