@@ -1,0 +1,11 @@
+#todo
+1. ROM w enkoderze:
+    - generacja plików verilogowych,
+    - zmiana w enkoderze (osobny moduł nb_bits_calculator).
+2. Szerokość nb_bits w enkoderze.
+3. Parametryzacja.
+4. Dekoder.
+5. Stan wejściowy (ustalony dla enkodera, zmienny dla dekodera!) -> musi być już zrobiony ROM.
+6. Rozszerzenie alfabetu.
+7. Ostateczny testbench.
+
