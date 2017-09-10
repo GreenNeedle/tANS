@@ -5,11 +5,11 @@ module start_rom(
     input [7:0] symbol,
     output [7:0] start
     );
-    
+
     reg [7:0] start_reg;
-    
+
     always @ (symbol) begin
-        case(symbol)
+        case (symbol)
             8'b00110000 : begin
                 start_reg = 8'b11111101;
             end
@@ -21,10 +21,10 @@ module start_rom(
             end
             default : begin
                 start_reg = 8'b00000000;
-            end    
+            end
         endcase
     end
-    
+
     assign start = start_reg;
-    
+
 endmodule
