@@ -1,7 +1,17 @@
-ENCTARGETS := nb.txt start.txt encoding.txt
-DECTARGETS := decoding.txt
+PWD     := $(shell pwd)
+GEN_DIR ?= $(PWD)
 
-TARGETS += $(ENCTARGETS) $(DECTARGETS)
+
+ENCTABS := nb.txt start.txt encoding.txt
+DECTABS := decoding.txt
+
+TABS += $(ENCTABS) $(DECTABS)
+
+
+ENCROMS := nb_rom.v start_rom.v encoding_rom.v
+DECROMS := decoding_rom.v
+
+ROMS += $(ENCROMS) $(DECROMS)
 
 CFLAGS += -std=c99
 
@@ -9,14 +19,19 @@ CFLAGS += -std=c99
 LFLAGS += -lm
 
 
-.PHONY: clean com
+main.o: main.c
+	gcc -o $@ $(CFLAGS) $< $(LFLAGS)
+
+
+.PHONY: clean gen_tables gen_roms
 
 clean:
-	rm -f main
-	rm -f $(TARGETS)
+	rm -f main.o
+	rm -f $(TABS)
+	cd $(GEN_DIR) && rm -f $(ENCROMS)
 
-com: main.c
-	gcc -o main $(CFLAGS) $< $(LFLAGS)
+gen_tables: main.o
+	./main.o
 
-run:
-	./main
+gen_roms: gen_tables
+	./generate_ROMs.py $(GEN_DIR)
