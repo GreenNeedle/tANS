@@ -16,7 +16,7 @@ module symbols_counter_tb();
         #3
     
         #40 en <= 0;
-        #10 en <= 1;
+        @ (posedge CLK) en <= 1;
         
         #50
                 
@@ -24,7 +24,7 @@ module symbols_counter_tb();
     end
     
     always begin
-        #5 CLK <= ~CLK;
+        #5 CLK = ~CLK;
     end
     
     symbols_counter #(.MAX(4)) symbol_counter_inst(

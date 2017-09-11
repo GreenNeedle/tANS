@@ -16,25 +16,28 @@ module preprocessor_tb();
         #3  
         
         clr <= 0;
-        #7
         
+        @ (posedge CLK)
         symbol <= 8'b00110001;
-        #10
         
+        @ (posedge CLK)
         symbol <= 8'b00110010;
-        #10
         
+        @ (posedge CLK)
         symbol <= 8'b00110001;
-        #20
         
+        @ (posedge CLK)
+        symbol <= 8'b00110001;
+        
+        @ (posedge CLK)
         symbol <= 8'b00110000;
-        #10
-    
+        
+        @ (posedge CLK)
         $finish;
     end
     
     always begin
-        #5 CLK <= ~CLK;
+        #5 CLK = ~CLK;
     end
     
     preprocessor preprocessor_inst(

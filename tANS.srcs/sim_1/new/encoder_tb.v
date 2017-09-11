@@ -10,39 +10,42 @@ module encoder_tb();
     wire [2:0] valid_bits;
     
     initial begin
-        CLK = 1;
-        clr = 1;
-        en = 1;
-        symbol = 8'b00110010;
+        CLK <= 1;
+        clr <= 1;
+        en <= 1;
+        symbol <= 8'b00110010;
         #3  
         
-        clr = 0;
-        #7
+        clr <= 0;
         
-        symbol = 8'b00110001;
-        #10
+        @ (posedge CLK)
+        symbol <= 8'b00110001;
         
-        symbol = 8'b00110010;
-        #10
+        @ (posedge CLK)
+        symbol <= 8'b00110010;
         
-        symbol = 8'b00110001;
-        #20
+        @ (posedge CLK)
+        symbol <= 8'b00110001;
         
-        symbol = 8'b00110000;
-        #10
+        @ (posedge CLK)
+        symbol <= 8'b00110001;
         
-        symbol = 8'b00110010;
-        #10
+        @ (posedge CLK)
+        symbol <= 8'b00110000;
         
-        symbol = 8'b00110001;
-        #10
+        @ (posedge CLK)        
+        symbol <= 8'b00110010;
         
-        symbol = 8'b00110010;
-        #10
+        @ (posedge CLK)
+        symbol <= 8'b00110001;
         
-        symbol = 8'b00110000;
-        #10
-    
+        @ (posedge CLK)
+        symbol <= 8'b00110010;
+        
+        @ (posedge CLK)
+        symbol <= 8'b00110000;
+        
+        @ (posedge CLK)
         $finish;
     end
     

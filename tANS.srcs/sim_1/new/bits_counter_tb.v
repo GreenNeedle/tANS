@@ -5,7 +5,7 @@ module bits_counter_tb();
 
     reg CLK, clr, en;
     reg [2:0] nb_bits;
-    wire [3:0] valid_bits;
+    wire [2:0] valid_bits;
     wire done;
     
     initial begin
@@ -16,28 +16,29 @@ module bits_counter_tb();
         #3
         
         clr <= 0;
-        #17
+        #10
         
+        @ (posedge CLK)
         nb_bits <= 2;
-        #10
         
+        @ (posedge CLK)
         nb_bits <= 5;
-        #10
         
+        @ (posedge CLK)
         nb_bits <= 4;
-        #10
         
+        @ (posedge CLK)
         nb_bits <= 7;
-        #10
         
+        @ (posedge CLK)
         nb_bits <= 3;
-        #10
         
+        @ (posedge CLK)
         $finish;
     end
     
     always begin
-        #5 CLK <= ~CLK;
+        #5 CLK = ~CLK;
     end
     
     bits_counter bits_counter_inst(

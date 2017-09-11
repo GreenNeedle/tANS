@@ -16,42 +16,43 @@ module buffer_tb();
         #3
         
         clr <= 0;
-        #27
+        #20
         
+        @ (posedge CLK)
         new_bits <= 16'b0000000000000100;
-        #10
         
+        @ (posedge CLK)
         new_bits <= 16'b0000000000010000;
-        #10
         
+        @ (posedge CLK)
         new_bits <= 16'b0000000000000000;
-        #10
         
+        @ (posedge CLK)
         new_bits <= 16'b0000000011000000;
-        #10
         
+        @ (posedge CLK)
         en <= 0;
         new_bits <= 16'b0000000000000010;
-        #10  
         
+        @ (posedge CLK)
         en <= 1;
         new_bits <= 16'b0000000000000100;
-        #10
-              
-        new_bits <= 16'b0000000000010000;
-        #10
-              
-        new_bits <= 16'b0000000000000000;
-        #10
-              
-        new_bits <= 16'b0000000011000000;
-        #10
         
+        @ (posedge CLK)      
+        new_bits <= 16'b0000000000010000;
+        
+        @ (posedge CLK)      
+        new_bits <= 16'b0000000000000000;
+        
+        @ (posedge CLK)     
+        new_bits <= 16'b0000000011000000;
+        
+        @ (posedge CLK)
         $finish;
     end
     
     always begin
-        #5 CLK <= ~CLK;
+        #5 CLK = ~CLK;
     end
     
     buffer buffer_inst(
