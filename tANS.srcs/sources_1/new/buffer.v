@@ -14,7 +14,7 @@ module buffer(
     
     reg [15:0] buff;
     reg done, symbols;
-    reg[7:0] data_out;
+    reg [7:0] data_out;
     
     always @ (posedge CLK) begin
         if (clr) begin
