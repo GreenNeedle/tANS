@@ -4,7 +4,7 @@
 module nb_bits_calculator(
     input [7:0] state,
     input [7:0] nb,
-    output [3:0] nb_bits
+    output [2:0] nb_bits
     );
     
     parameter r = 5;

@@ -2,7 +2,7 @@
 
 
 module mask_generator(
-    input [3:0] nb_bits,
+    input [2:0] nb_bits,
     output [7:0] data_valid
     );
     

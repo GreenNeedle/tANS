@@ -5,7 +5,7 @@ module state_machine_tb();
 
     reg CLK, clr, en;
     reg [7:0] symbol;
-    reg [3:0] nb_bits;
+    reg [2:0] nb_bits;
     wire [7:0] state;
     
     initial begin

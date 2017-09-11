@@ -6,7 +6,7 @@ module state_machine(
     input clr,
     input en,
     input [7:0] symbol,
-    input [3:0] nb_bits,
+    input [2:0] nb_bits,
     output [7:0] state
     );
     

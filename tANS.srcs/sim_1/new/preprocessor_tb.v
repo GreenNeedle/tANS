@@ -6,7 +6,7 @@ module preprocessor_tb();
     reg CLK, clr, en;
     reg [7:0] symbol;
     wire [7:0] state, data_valid;
-    wire [3:0] nb_bits;
+    wire [2:0] nb_bits;
     
     initial begin
         CLK <= 1;

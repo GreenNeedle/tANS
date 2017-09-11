@@ -8,7 +8,7 @@ module preprocessor(
     input [7:0] symbol,
     output [7:0] state,
     output [7:0] data_valid,
-    output [3:0] nb_bits
+    output [2:0] nb_bits
     );
     
     wire [7:0] nb;
