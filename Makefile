@@ -33,8 +33,8 @@ clean:
 gen_tables: main.o
 	./main.o
 
-gen_roms: gen_tables
-	./generate_ROMs.py $(GEN_DIR)
+gen_modules: gen_tables
+	./generate_modules.py $(GEN_DIR)
 
 help:
 	@echo "clean       :  clean generated files"

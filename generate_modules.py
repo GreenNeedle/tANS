@@ -59,7 +59,7 @@ def declare_default_val(target_file, output_name, output_length):
                       "            end\n")
 
 
-def create_ROM(dir_path, module_name, file_ext, input_name, input_length, output_name, output_length, table_name, default):
+def create_ROM(dir_path, module_name, file_ext, input_name, input_length, output_name, output_length, table_name, ord_symbol, default):
     file_target = dir_path + module_name + file_ext
 
     rom_file = open(file_target, "w+")
@@ -72,7 +72,7 @@ def create_ROM(dir_path, module_name, file_ext, input_name, input_length, output
 
     begin_always_case(rom_file, input_name)
 
-    declare_values(rom_file, table_name, input_length, output_name, output_length, True)
+    declare_values(rom_file, table_name, input_length, output_name, output_length, ord_symbol)
 
     # If the number of values doesn't satisfy all the possible addresses, the default value is needed to synthesise the module.
     # It isn't used in an algorithm.
