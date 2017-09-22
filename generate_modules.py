@@ -55,7 +55,7 @@ def declare_values(target_file, table_name, addr_length, output_name, output_len
 
 def declare_default_val(target_file, output_name, output_length):
     target_file.write("            default : begin\n" + \
-                      "                " + output_name + "_reg = " + str(output_length) + "'b" + "{0:08b}".format(0) + ";\n" + \
+                      "                " + output_name + "_reg = " + str(output_length) + "'b" + ("{0:0" + str(output_length) + "b}").format(0) + ";\n" + \
                       "            end\n")
 
 
@@ -94,7 +94,7 @@ def main(argv):
     verilog_ext = ".v"
     create_ROM(dir_path, "nb_rom", verilog_ext, "symbol", 8, "nb", 8, "nb", True, True)
     create_ROM(dir_path, "start_rom", verilog_ext, "symbol", 8, "start", 8, "start", True, True)
-    create_ROM(dir_path, "encoding_rom", verilog_ext, "address", 4, "state", 8, "encoding", False, False)
+    create_ROM(dir_path, "encoding_rom", verilog_ext, "address", 4, "state", 5, "encoding", False, False)
     print("Done!")
 
 

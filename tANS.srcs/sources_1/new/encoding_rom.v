@@ -3,60 +3,60 @@
 
 module encoding_rom(
     input [3:0] address,
-    output [7:0] state
+    output [4:0] state
     );
 
-    reg [7:0] state_reg;
+    reg [4:0] state_reg;
 
     always @ (address) begin
         case (address)
-            4'b110000 : begin
-                state_reg = 8'b00010010;
+            4'b0000 : begin
+                state_reg = 5'b10010;
             end
-            4'b110001 : begin
-                state_reg = 8'b00010110;
+            4'b0001 : begin
+                state_reg = 5'b10110;
             end
-            4'b110010 : begin
-                state_reg = 8'b00011001;
+            4'b0010 : begin
+                state_reg = 5'b11001;
             end
-            4'b110011 : begin
-                state_reg = 8'b00010000;
+            4'b0011 : begin
+                state_reg = 5'b10000;
             end
-            4'b110100 : begin
-                state_reg = 8'b00010001;
+            4'b0100 : begin
+                state_reg = 5'b10001;
             end
-            4'b110101 : begin
-                state_reg = 8'b00010101;
+            4'b0101 : begin
+                state_reg = 5'b10101;
             end
-            4'b110110 : begin
-                state_reg = 8'b00011000;
+            4'b0110 : begin
+                state_reg = 5'b11000;
             end
-            4'b110111 : begin
-                state_reg = 8'b00011011;
+            4'b0111 : begin
+                state_reg = 5'b11011;
             end
-            4'b111000 : begin
-                state_reg = 8'b00011101;
+            4'b1000 : begin
+                state_reg = 5'b11101;
             end
-            4'b111001 : begin
-                state_reg = 8'b00011110;
+            4'b1001 : begin
+                state_reg = 5'b11110;
             end
-            4'b111010 : begin
-                state_reg = 8'b00011111;
+            4'b1010 : begin
+                state_reg = 5'b11111;
             end
-            4'b111011 : begin
-                state_reg = 8'b00010011;
+            4'b1011 : begin
+                state_reg = 5'b10011;
             end
-            4'b111100 : begin
-                state_reg = 8'b00010100;
+            4'b1100 : begin
+                state_reg = 5'b10100;
             end
-            4'b111101 : begin
-                state_reg = 8'b00010111;
+            4'b1101 : begin
+                state_reg = 5'b10111;
             end
-            4'b111110 : begin
-                state_reg = 8'b00011010;
+            4'b1110 : begin
+                state_reg = 5'b11010;
             end
-            4'b111111 : begin
-                state_reg = 8'b00011100;
+            4'b1111 : begin
+                state_reg = 5'b11100;
             end
         endcase
     end

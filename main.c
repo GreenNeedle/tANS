@@ -160,7 +160,7 @@ void write_encoding_table(int* encoding_table)
     for (int i = 0; i < L; i++) {
         char binary[8];
         parse_char_to_binary((char)(encoding_table[i]), binary);
-        for (int i = 7; i >= 0; --i)
+        for (int i = 4; i >= 0; --i)
             fputc(binary[i], fp);
         fputc('\n', fp);
     }
