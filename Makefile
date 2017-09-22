@@ -35,3 +35,8 @@ gen_tables: main.o
 
 gen_roms: gen_tables
 	./generate_ROMs.py $(GEN_DIR)
+
+help:
+	@echo "clean       :  clean generated files"
+	@echo "gen_tables  :  generate files with raw values defined by tANS"
+	@echo "gen_roms    :  generate verilog files"

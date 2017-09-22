@@ -92,9 +92,9 @@ def main(argv):
     print("Creating ROM modules...")
     dir_path = sys.argv[1] + "/"
     verilog_ext = ".v"
-    create_ROM(dir_path, "nb_rom", verilog_ext, "symbol", 8, "nb", 8, "nb", True)
-    create_ROM(dir_path, "start_rom", verilog_ext, "symbol", 8, "start", 8, "start", True)
-    create_ROM(dir_path, "encoding_rom", verilog_ext, "address", 4, "state", 8, "encoding", False)
+    create_ROM(dir_path, "nb_rom", verilog_ext, "symbol", 8, "nb", 8, "nb", True, True)
+    create_ROM(dir_path, "start_rom", verilog_ext, "symbol", 8, "start", 8, "start", True, True)
+    create_ROM(dir_path, "encoding_rom", verilog_ext, "address", 4, "state", 8, "encoding", False, False)
     print("Done!")
 
 
