@@ -39,4 +39,4 @@ gen_roms: gen_tables
 help:
 	@echo "clean       :  clean generated files"
 	@echo "gen_tables  :  generate files with raw values defined by tANS"
-	@echo "gen_roms    :  generate verilog files"
+	@echo "gen_modules :  generate verilog files"
