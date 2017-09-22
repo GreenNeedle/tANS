@@ -5,18 +5,19 @@ module symbols_counter(
     input CLK,
     input clr,
     input en,
-    output [7:0] symbols_count,
+    output [W-1:0] symbols_count,
     output symbols_done
     );
     
+    parameter W = 8;
     parameter MAX = 8;
     
-    reg [7:0] count;
+    reg [W-1:0] count;
     reg done;
     
     always @ (posedge CLK) begin
         if (clr) begin
-            count <= 8'b00000000;
+            count <= {W{1'b0}};
             done <= 1'b0;
         end
         else if (en) begin
@@ -25,7 +26,7 @@ module symbols_counter(
                 done <= 1'b0;
             end
             else begin
-                count <= 8'b00000000;
+                count <= {W{1'b0}};
                 done <= 1'b1;
             end
         end

@@ -6,7 +6,7 @@ module preprocessor(
     input clr,
     input en,
     input [7:0] symbol,
-    output [7:0] state,
+    output [4:0] state,
     output [7:0] data_valid,
     output [2:0] nb_bits
     );

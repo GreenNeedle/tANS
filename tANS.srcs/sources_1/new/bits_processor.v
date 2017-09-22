@@ -5,7 +5,7 @@ module bits_processor(
     input CLK,
     input clr,
     input en,
-    input [7:0] state,
+    input [4:0] state,
     input [7:0] data_valid,
     input [2:0] nb_bits,
     output [7:0] data_out,

@@ -7,11 +7,11 @@ module state_machine(
     input en,
     input [7:0] symbol,
     input [2:0] nb_bits,
-    output [7:0] state
+    output [4:0] state
     );
     
     wire [7:0] start;
-    wire [7:0] next_state;
+    wire [4:0] next_state;
     wire [3:0] address;
     
     start_rom start_rom_inst(
@@ -31,7 +31,7 @@ module state_machine(
         .state(next_state)
     );
     
-    register register_inst(
+    register state_reg(
         .CLK(CLK),
         .clr(clr),
         .en(en),

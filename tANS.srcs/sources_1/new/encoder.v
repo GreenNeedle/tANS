@@ -10,7 +10,7 @@ module encoder(
     output byte_done,
     output symbols_done,
     output [2:0] valid_bits,
-    output [7:0] state
+    output [4:0] state
     );
     
     wire [7:0] data_valid;

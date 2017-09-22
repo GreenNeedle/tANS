@@ -3,7 +3,7 @@
 
 module address_calculator(
     input [7:0] start,
-    input [7:0] state,
+    input [4:0] state,
     input [2:0] nb_bits,
     output [3:0] address
     );

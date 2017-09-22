@@ -9,7 +9,7 @@ module top_encoder_tb();
     wire byte_done, symbols_done;
     wire [2:0] valid_bits;
     wire [7:0] symbols_count;
-    wire [7:0] last_state;
+    wire [4:0] last_state;
     
     initial begin
         CLK <= 1;
