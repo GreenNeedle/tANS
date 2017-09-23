@@ -177,7 +177,7 @@ void write_decoding_table(struct decoding_table *decoding_table)
             fputc(binary[i], fp);
 
         parse_char_to_binary((char)(decoding_table[X].nb_bits), binary);
-        for(int i = 7; i >= 0; --i)
+        for(int i = 2; i >= 0; --i)
             fputc(binary[i], fp);
 
         parse_char_to_binary((char)(decoding_table[X].new_x), binary);
