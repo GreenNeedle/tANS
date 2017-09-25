@@ -7,11 +7,13 @@ module decoder(
     input en,
     input [7:0] next_byte,
     output [7:0] symbol,
-    output [3:0] state,
+    output [R-1:0] state,
     output fetch
     );
     
-    dec_state_machine dec_state_machine_inst(
+    parameter R = 4;
+    
+    dec_state_machine #(.R(R)) dec_state_machine_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
@@ -20,7 +22,7 @@ module decoder(
         .fetch(fetch)
     );
     
-    symbol_evaluator symbol_evaluator_inst(
+    symbol_evaluator #(.R(R)) symbol_evaluator_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

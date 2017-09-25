@@ -4,15 +4,16 @@
 
 #define L 16  //number of states
 #define R  4  //L = 2 ^ R, R in N
-#define m  3  //size of an alphabet
+#define m  4  //size of an alphabet
 
-#define p0 (3.0 / L)
-#define p1 (8.0 / L)
-#define p2 (5.0 / L)
+#define p0 (5.0 / L)
+#define p1 (4.0 / L)
+#define p2 (1.0 / L)
+#define p3 (6.0 / L)
 
 
-static char alphabet[] = {'0', '1', '2'};
-static int Ls[] = {3, 8, 5};  //number of occurences of given symbols normalized to L
+static char alphabet[] = {'0', '1', '2', '3'};
+static int Ls[] = {5, 4, 1, 6};  //number of occurences of given symbols normalized to L
 
 
 struct decoding_table {
@@ -192,12 +193,14 @@ void write_decoding_table(struct decoding_table *decoding_table)
 
 int main()
 {
-    char symbol[] = {'1', '1', '0', '2', '2', '1', '0', '2', '1', '0', '2', '1', '2', '1', '1', '1'};
+    //char symbol[] = {'1', '1', '0', '2', '2', '1', '0', '2', '1', '0', '2', '1', '2', '1', '1', '1'};
 
-    /*spread(symbol);
+    char symbol[] = {'0', '0', '0', '0', '0', '1', '1', '1', '1', '2', '3', '3', '3', '3', '3', '3'};
+
+    spread(symbol);
     for (int i  = 0; i < L; i++)
         printf("%c ", symbol[i]);
-    printf("\n");*/
+    printf("\n");
 
     struct decoding_table decoding_table[L];
     prepare_decoding(symbol, decoding_table);

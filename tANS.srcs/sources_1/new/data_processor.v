@@ -16,7 +16,8 @@ module data_processor(
     wire [2:0] nb_bits_del;
     wire [7:0] buff_out;
     
-    dec_bits_counter #(.L(2)) dec_bits_counter_inst(
+    //clr sets value nb_bits for the first state
+    dec_bits_counter #(.N(2)) dec_bits_counter_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

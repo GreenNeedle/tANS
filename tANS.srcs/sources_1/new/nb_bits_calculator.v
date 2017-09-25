@@ -2,12 +2,13 @@
 
 
 module nb_bits_calculator(
-    input [4:0] state,
+    input [R:0] state,
     input [7:0] nb,
     output [2:0] nb_bits
     );
     
-    parameter r = 5;
+    parameter R = 4;
+    parameter r = R + 1;
     
     assign nb_bits = (state + nb) >> r;
     

@@ -6,14 +6,16 @@ module dec_preprocessor(
     input clr,
     input en,
     input [2:0] nb_bits,
-    input [3:0] state,
+    input [R-1:0] state,
     input [7:0] next_byte,
     output [7:0] base_state,
     output [7:0] data,
     output fetch
     );
     
-    base_state_evaluator base_state_evaluator_inst(
+    parameter R = 4;
+    
+    base_state_evaluator #(.R(R)) base_state_evaluator_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

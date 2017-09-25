@@ -5,11 +5,13 @@ module register(
     input CLK,
     input clr,
     input en,
-    input [4:0] in,
-    output [4:0] out
+    input [R:0] in,
+    output [R:0] out
     );
     
-    reg [4:0] temp;
+    parameter R = 4;
+    
+    reg [R:0] temp;
     
     always @ (posedge CLK or posedge clr) begin
         if (clr) begin

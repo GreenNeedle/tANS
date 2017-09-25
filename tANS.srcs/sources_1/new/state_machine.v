@@ -7,11 +7,13 @@ module state_machine(
     input en,
     input [7:0] symbol,
     input [2:0] nb_bits,
-    output [4:0] state
+    output [R:0] state
     );
     
+    parameter R = 4;
+    
     wire [7:0] start;
-    wire [4:0] next_state;
+    wire [R:0] next_state;
     wire [3:0] address;
     
     start_rom start_rom_inst(
@@ -19,7 +21,7 @@ module state_machine(
         .start(start)
     );
     
-    address_calculator address_calculator_inst(
+    address_calculator #(.R(R)) address_calculator_inst(
         .start(start),
         .state(state),
         .nb_bits(nb_bits),
@@ -31,7 +33,7 @@ module state_machine(
         .state(next_state)
     );
     
-    register state_reg(
+    register #(.R(R)) state_reg(
         .CLK(CLK),
         .clr(clr),
         .en(en),

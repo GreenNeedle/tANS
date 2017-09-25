@@ -10,13 +10,15 @@ module encoder(
     output byte_done,
     output symbols_done,
     output [2:0] valid_bits,
-    output [4:0] state
+    output [R:0] state
     );
+    
+    parameter R = 4;
     
     wire [7:0] data_valid;
     wire [2:0] nb_bits;
     
-    preprocessor preprocessor_inst(
+    preprocessor #(.R(R)) preprocessor_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
@@ -26,7 +28,7 @@ module encoder(
         .nb_bits(nb_bits)
     );
     
-    bits_processor bits_processor_inst(
+    bits_processor #(.R(R)) bits_processor_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

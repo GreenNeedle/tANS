@@ -11,13 +11,16 @@ module start_rom(
     always @ (symbol) begin
         case (symbol)
             8'b00110000 : begin
-                start_reg = 8'b11111101;
-            end
-            8'b00110001 : begin
                 start_reg = 8'b11111011;
             end
+            8'b00110001 : begin
+                start_reg = 8'b00000001;
+            end
             8'b00110010 : begin
-                start_reg = 8'b00000110;
+                start_reg = 8'b00001000;
+            end
+            8'b00110011 : begin
+                start_reg = 8'b00000100;
             end
             default : begin
                 start_reg = 8'b00000000;

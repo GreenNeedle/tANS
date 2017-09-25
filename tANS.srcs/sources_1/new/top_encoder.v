@@ -11,11 +11,14 @@ module top_encoder(
     output symbols_done,
     output [2:0] valid_bits,
     output [7:0] symbols_count,
-    output [7:0] last_state
+    output [R:0] last_state
     );
+    
+    parameter R = 4;
     
     wire done;
     
+    //MAX - how many symbols will be processed - 1
     symbols_counter #(.MAX(9)) symbols_counter_inst(
         .CLK(CLK),
         .clr(clr),
@@ -24,7 +27,7 @@ module top_encoder(
         .symbols_done(done)
     );
     
-    encoder encoder_inst(
+    encoder #(.R(R)) encoder_inst(
         .CLK(CLK),
         .clr(clr),
         .en(!done),

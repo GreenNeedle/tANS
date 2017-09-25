@@ -6,10 +6,12 @@ module preprocessor(
     input clr,
     input en,
     input [7:0] symbol,
-    output [4:0] state,
+    output [R:0] state,
     output [7:0] data_valid,
     output [2:0] nb_bits
     );
+    
+    parameter R = 4;
     
     wire [7:0] nb;
     
@@ -18,7 +20,7 @@ module preprocessor(
         .nb(nb)
     );
     
-    nb_bits_calculator nb_bits_calculator_inst(
+    nb_bits_calculator #(.R(R)) nb_bits_calculator_inst(
         .state(state),
         .nb(nb),
         .nb_bits(nb_bits)
@@ -29,7 +31,7 @@ module preprocessor(
         .data_valid(data_valid)
     );
     
-    state_machine state_machine_inst(
+    state_machine #(.R(R)) state_machine_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

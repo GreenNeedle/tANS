@@ -9,13 +9,13 @@ module dec_bits_counter(
     output [2:0] free_bits
     );
     
-    parameter L = 3'b000;
+    parameter N = 3'b000;
     
     reg [2:0] k;
     
     always @ (posedge CLK) begin
         if (clr) begin
-            k[2:0] <= L;
+            k[2:0] <= N;
         end
         else if (en) begin
             k[2:0] <= k[2:0] + nb_bits;

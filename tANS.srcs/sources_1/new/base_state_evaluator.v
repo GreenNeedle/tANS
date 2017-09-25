@@ -5,9 +5,11 @@ module base_state_evaluator(
     input CLK,
     input clr,
     input en,
-    input [3:0] state,
+    input [R-1:0] state,
     output [7:0] base_state
     );
+    
+    parameter R = 4;
     
     wire [7:0] temp;
     

@@ -5,9 +5,11 @@ module symbol_evaluator(
     input CLK,
     input clr,
     input en,
-    input [3:0] state,
+    input [R-1:0] state,
     output [7:0] symbol
     );
+    
+    parameter R = 4;
     
     wire [7:0] temp;
     
@@ -16,8 +18,8 @@ module symbol_evaluator(
         .symbol(temp)
     );
     
-    //First symbol must be evaluated beforehand.
-    symbol_register #(.B(8'b00110000)) register(
+    //first symbol must be evaluated beforehand to be set by clr
+    symbol_register #(.B(8'b00110001)) register(
         .CLK(CLK),
         .clr(clr),
         .en(en),

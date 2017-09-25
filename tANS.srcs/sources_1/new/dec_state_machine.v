@@ -6,9 +6,11 @@ module dec_state_machine(
     input clr,
     input en,
     input [7:0] next_byte,
-    output [3:0] state,
+    output [R-1:0] state,
     output fetch
     );
+    
+    parameter R = 4;
     
     wire [2:0] nb_bits;
     wire [7:0] base_state;
@@ -19,7 +21,7 @@ module dec_state_machine(
         .nb_bits(nb_bits)
     );
     
-    dec_preprocessor dec_preprocessor_inst(
+    dec_preprocessor #(.R(R)) dec_preprocessor_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
@@ -31,7 +33,7 @@ module dec_state_machine(
         .fetch(fetch)
     );
     
-    state_evaluator state_evaluator_inst(
+    state_evaluator #(.R(R)) state_evaluator_inst(
         .base_state(base_state),
         .data_in(data),
         .next_state(state)
