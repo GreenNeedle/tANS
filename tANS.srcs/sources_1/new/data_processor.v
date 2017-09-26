@@ -17,7 +17,7 @@ module data_processor(
     wire [7:0] buff_out;
     
     //clr sets value nb_bits for the first state
-    dec_bits_counter #(.N(2)) dec_bits_counter_inst(
+    dec_bits_counter #(.N(3)) dec_bits_counter_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
@@ -39,7 +39,7 @@ module data_processor(
     );
     
     //clr sets value for the first state
-    nb_bits_register #(.N(2)) nb_bits_register_inst(
+    nb_bits_register #(.N(3)) nb_bits_register_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

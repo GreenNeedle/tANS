@@ -2,9 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define L 32  //number of states
-#define R  5  //L = 2 ^ R, R in N
-#define m  8  //size of an alphabet
+#define L             32  //number of states
+#define R              5  //L = 2 ^ R, R in N
+#define m              8  //size of an alphabet
+#define NB_BITS_WIDTH  3
 
 
 //Test for m=4 and L=16
@@ -196,7 +197,7 @@ void write_decoding_table(struct decoding_table *decoding_table)
             fputc(binary[i], fp);
 
         parse_char_to_binary((char)(decoding_table[X].nb_bits), binary);
-        for(int i = 2; i >= 0; --i)
+        for(int i = NB_BITS_WIDTH - 1; i >= 0; --i)
             fputc(binary[i], fp);
 
         parse_char_to_binary((char)(decoding_table[X].new_x), binary);

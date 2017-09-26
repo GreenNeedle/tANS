@@ -19,7 +19,7 @@ module symbol_evaluator(
     );
     
     //first symbol must be evaluated beforehand to be set by clr
-    symbol_register #(.B(8'b00110001)) register(
+    symbol_register #(.B(8'b00110010)) register(
         .CLK(CLK),
         .clr(clr),
         .en(en),

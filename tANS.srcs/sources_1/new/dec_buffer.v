@@ -19,10 +19,12 @@ module dec_buffer(
             //buff is intialized to the first two bytes without first nb_bits bits of data
             //from a stream.
             //buff <= 16'b1101000110100011;
-            //buff <= 16'b1000011010100000; //last bit not valid, tb1: m=3, L=16
-            buff <= 16'b0011101000000000; //tb2: m=4, L=16
+            //buff <= 16'b1000011010100000; //tb1: m=3, L=16
+            //buff <= 16'b0011101000000000; //tb2: m=4, L=16
+            buff <= 16'b1011011100000000; //tb3: m=8, L=32
             //data_out <= 8'b11100001; //tb1: m=3, L=16
-            data_out <= 8'b11001110;
+            //data_out <= 8'b11001110; //tb2: m=4, L=16
+            data_out <= 8'b00010110; //tb3: m=8, L=32
         end
         else if (en) begin
             buff <= buff << nb_bits;

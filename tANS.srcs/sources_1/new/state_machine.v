@@ -33,7 +33,7 @@ module state_machine(
         .state(next_state)
     );
     
-    register #(.R(R)) state_reg(
+    register #(.R(R), .S(32)) state_reg(
         .CLK(CLK),
         .clr(clr),
         .en(en),

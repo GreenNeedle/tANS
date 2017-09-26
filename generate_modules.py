@@ -113,11 +113,19 @@ def main(argv):
     verilog_ext = ".v"
     create_ROM(dir_path, "nb_rom", verilog_ext, "symbol", 8, "nb", 8, "nb", True, True)
     create_ROM(dir_path, "start_rom", verilog_ext, "symbol", 8, "start", 8, "start", True, True)
-    create_ROM(dir_path, "encoding_rom", verilog_ext, "address", 4, "state", 5, "encoding", False, False)
+    #test 1: L = 16
+    #create_ROM(dir_path, "encoding_rom", verilog_ext, "address", 4, "state", 5, "encoding", False, False)
+    #test 2: L = 32
+    create_ROM(dir_path, "encoding_rom", verilog_ext, "address", 5, "state", 6, "encoding", False, False)
     split_decoding_table(dir_path, ".txt")
-    create_ROM(dir_path, "symbol_rom", verilog_ext, "state", 4, "symbol", 8, "symbol", False, False)
-    create_ROM(dir_path, "nb_bits_rom", verilog_ext, "state", 4, "nb_bits", 3, "nb_bits", False, False)
-    create_ROM(dir_path, "base_state_rom", verilog_ext, "state", 4, "base_state", 8, "base_state", False, False)
+    #test 1: L = 16
+    #create_ROM(dir_path, "symbol_rom", verilog_ext, "state", 4, "symbol", 8, "symbol", False, False)
+    #create_ROM(dir_path, "nb_bits_rom", verilog_ext, "state", 4, "nb_bits", 3, "nb_bits", False, False)
+    #create_ROM(dir_path, "base_state_rom", verilog_ext, "state", 4, "base_state", 8, "base_state", False, False)
+    #test 2: L = 32
+    create_ROM(dir_path, "symbol_rom", verilog_ext, "state", 5, "symbol", 8, "symbol", False, False)
+    create_ROM(dir_path, "nb_bits_rom", verilog_ext, "state", 5, "nb_bits", 3, "nb_bits", False, False)
+    create_ROM(dir_path, "base_state_rom", verilog_ext, "state", 5, "base_state", 8, "base_state", False, False)
     print("Done!")
 
 

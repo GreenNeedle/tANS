@@ -10,12 +10,13 @@ module register(
     );
     
     parameter R = 4;
+    parameter S = 16;
     
     reg [R:0] temp;
     
     always @ (posedge CLK or posedge clr) begin
         if (clr) begin
-            temp <= 5'b10000;
+            temp <= S;
         end
         else if (en) begin
             temp <= in;
