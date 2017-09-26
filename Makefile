@@ -13,7 +13,7 @@ DECROMS := symbol_rom.v nb_bits_rom.v base_state_rom.v
 
 ROMS += $(ENCROMS) $(DECROMS)
 
-CFLAGS += -std=c99
+CFLAGS += -std=c99 -g
 
 # include standard math library
 LFLAGS += -lm
