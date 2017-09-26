@@ -15,11 +15,11 @@ module top_encoder(
     );
     
     parameter R = 4;
+    parameter MAX = 9; //how many symbols will be processed - 1
     
     wire done;
     
-    //MAX - how many symbols will be processed - 1
-    symbols_counter #(.MAX(9)) symbols_counter_inst(
+    symbols_counter #(.MAX(MAX)) symbols_counter_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

@@ -5,7 +5,7 @@ module address_calculator(
     input [7:0] start,
     input [R:0] state,
     input [2:0] nb_bits,
-    output [3:0] address
+    output [R-1:0] address
     );
     
     parameter R = 4;

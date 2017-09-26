@@ -14,7 +14,7 @@ module state_machine(
     
     wire [7:0] start;
     wire [R:0] next_state;
-    wire [3:0] address;
+    wire [R-1:0] address;
     
     start_rom start_rom_inst(
         .symbol(symbol),

@@ -2,18 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define L 16  //number of states
-#define R  4  //L = 2 ^ R, R in N
-#define m  4  //size of an alphabet
-
-#define p0 (5.0 / L)
-#define p1 (4.0 / L)
-#define p2 (1.0 / L)
-#define p3 (6.0 / L)
+#define L 32  //number of states
+#define R  5  //L = 2 ^ R, R in N
+#define m  8  //size of an alphabet
 
 
-static char alphabet[] = {'0', '1', '2', '3'};
-static int Ls[] = {5, 4, 1, 6};  //number of occurences of given symbols normalized to L
+//Test for m=4 and L=16
+//static char alphabet[] = {'0', '1', '2', '3'};
+//static int Ls[] = {5, 4, 1, 6};  //number of occurences of given symbols normalized to L
+
+//Test for m=4 and L=16
+static char alphabet[] = {'0', '1', '2', '3', '4', '5', '6', '7'};
+static int Ls[] = {8, 3, 7, 2, 3, 4, 3, 2};
 
 
 struct decoding_table {
@@ -96,7 +96,7 @@ void prepare_encoding(char* symbol, int* nb, int* start, int* encoding_table)
         next[i] = Ls[i];
     }
 
-    //encoding_table = {18, 22, 25, 16, 17, 21, 24, 27 ,29, 30, 31, 19, 20, 23, 26, 28};
+    //ex. encoding_table = {18, 22, 25, 16, 17, 21, 24, 27 ,29, 30, 31, 19, 20, 23, 26, 28};
     //values sequentially for: '0' -> 3, 4, 5; '1' -> 8, ..., 15; '2' -> 5, ..., 9
     for(int x = L; x < 2 * L; x++) {
         char s = symbol[x-L];
@@ -113,13 +113,15 @@ void prepare_decoding(char* symbol, struct decoding_table* decoding_table)
         next[i] = Ls[i];
     next[m] = '\0';
 
+    int j = 0;
     for (int X = 0; X < L; X++) {
         decoding_table[X].symbol = symbol[X];
         int x = next[decoding_table[X].symbol - '0']++;  //actualization of the next occurence of a symbol (x_temp)
         decoding_table[X].nb_bits = R - (int)log2((double)x);
         decoding_table[X].new_x = (x << decoding_table[X].nb_bits) - L;  //the smallest possible new state
-        printf("%c -> %c|%d|%d\n",
-                  symbol[X], decoding_table[X].symbol, decoding_table[X].nb_bits, decoding_table[X].new_x);
+        printf("%d, %c -> %c|%d|%d\n",
+                  j, symbol[X], decoding_table[X].symbol, decoding_table[X].nb_bits, decoding_table[X].new_x);
+        j++;
     }
 }
 
@@ -129,6 +131,10 @@ void prepare_decoding(char* symbol, struct decoding_table* decoding_table)
 void write_nb_table(int* nb)
 {
     FILE* fp = fopen("nb.txt", "w");
+    if (fp == NULL) {
+        printf("Problem with file opening. Aborting.\n");
+        return;
+    }
     for (int i = 0; i < m; i++) {
         char binary[m];
         parse_char_to_binary((char)(nb[i]), binary);
@@ -144,6 +150,10 @@ void write_start_table(int* start)
 {
     //7 bits + 1 for sign (the oldest); 1 - negative, 0 - positive
     FILE* fp = fopen("start.txt", "w");
+    if (fp == NULL) {
+        printf("Problem with file opening. Aborting.\n");
+        return;
+    }
     for (int i = 0; i < m; i++) {
         char binary[m];
         parse_char_to_binary((char)(start[i]), binary);
@@ -158,10 +168,14 @@ void write_start_table(int* start)
 void write_encoding_table(int* encoding_table)
 {
     FILE* fp = fopen("encoding.txt", "w");
+    if (fp == NULL) {
+        printf("Problem with file opening. Aborting.\n");
+        return;
+    }
     for (int i = 0; i < L; i++) {
         char binary[8];
         parse_char_to_binary((char)(encoding_table[i]), binary);
-        for (int i = 4; i >= 0; --i)
+        for (int i = R; i >= 0; --i)
             fputc(binary[i], fp);
         fputc('\n', fp);
     }
@@ -171,6 +185,10 @@ void write_encoding_table(int* encoding_table)
 void write_decoding_table(struct decoding_table *decoding_table)
 {
     FILE* fp = fopen("decoding.txt", "w");
+    if (fp == NULL) {
+        printf("Problem with file opening. Aborting.\n");
+        return;
+    }
     for (int X = 0; X < L; X++) {
         char binary[8];
         parse_char_to_binary(decoding_table[X].symbol, binary);
@@ -195,7 +213,21 @@ int main()
 {
     //char symbol[] = {'1', '1', '0', '2', '2', '1', '0', '2', '1', '0', '2', '1', '2', '1', '1', '1'};
 
-    char symbol[] = {'0', '0', '0', '0', '0', '1', '1', '1', '1', '2', '3', '3', '3', '3', '3', '3'};
+    //Test for m=4 and L=16
+    //char symbol[] = {'0', '0', '0', '0', '0', '1', '1', '1', '1', '2', '3', '3', '3', '3', '3', '3'};
+
+    //General
+    char* symbol = malloc(sizeof(char) * (L + 1));
+    printf("symbol: ");
+    for (int i = 0; i < m; i++) {
+         char s = alphabet[i];
+         for (int j = 0; j < Ls[i]; j++) {
+             symbol[i] = s;
+             printf("%c ", symbol[i]);
+         }
+    }
+    symbol[L] = '/0';
+    printf("\n");
 
     spread(symbol);
     for (int i  = 0; i < L; i++)
@@ -216,6 +248,8 @@ int main()
     write_nb_table(nb);
     write_start_table(start);
     write_encoding_table(encoding_table);
+
+    free(symbol);
 
     return 0;
 }
