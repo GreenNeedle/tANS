@@ -10,6 +10,12 @@ module nb_bits_calculator(
     parameter R = 4;
     parameter r = R + 1;
     
-    assign nb_bits = (state + nb) >> r;
+    reg [8:0] out;
+    reg [2:0] nb_bits;
+    
+    always @ (*) begin
+        out <= state + nb;
+        nb_bits <= out >> r;
+    end
     
 endmodule
