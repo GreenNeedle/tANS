@@ -18,8 +18,8 @@ module base_state_evaluator(
         .base_state(temp)
     );
     
-    //clr sets the value for the first state
-    base_state_register #(.B(24)) register(
+    //clr -> B
+    base_state_register #(.B(0)) register(
         .CLK(CLK),
         .clr(clr),
         .en(en),

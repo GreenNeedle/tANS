@@ -2,10 +2,12 @@
 
 
 module fetch_evaluator(
-    input [2:0] nb_bits,
+    input [NB_BITS_WIDTH-1:0] nb_bits,
     input [2:0] free_bits,
     output fetch
     );
+    
+    parameter NB_BITS_WIDTH = 2;
     
     reg out;
     

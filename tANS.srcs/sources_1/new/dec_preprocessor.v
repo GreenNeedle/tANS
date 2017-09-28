@@ -5,7 +5,7 @@ module dec_preprocessor(
     input CLK,
     input clr,
     input en,
-    input [2:0] nb_bits,
+    input [NB_BITS_WIDTH-1:0] nb_bits,
     input [R-1:0] state,
     input [7:0] next_byte,
     output [7:0] base_state,
@@ -14,6 +14,7 @@ module dec_preprocessor(
     );
     
     parameter R = 4;
+    parameter NB_BITS_WIDTH = 2;
     
     base_state_evaluator #(.R(R)) base_state_evaluator_inst(
         .CLK(CLK),
@@ -23,7 +24,7 @@ module dec_preprocessor(
         .base_state(base_state)
     );
     
-    data_processor data_processor_inst(
+    data_processor #(.NB_BITS_WIDTH(NB_BITS_WIDTH)) data_processor_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

@@ -5,13 +5,14 @@ module nb_bits_register(
     input CLK,
     input clr,
     input en,
-    input [2:0] in,
-    output [2:0] out
+    input [NB_BITS_WIDTH-1:0] in,
+    output [NB_BITS_WIDTH-1:0] out
     );
     
-    parameter N = 3'b000;
+    parameter N = 0;
+    parameter NB_BITS_WIDTH = 2;
     
-    reg [2:0] temp;
+    reg [NB_BITS_WIDTH-1:0] temp;
     
     always @ (posedge CLK or posedge clr) begin
         if (clr) begin

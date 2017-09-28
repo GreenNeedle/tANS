@@ -5,19 +5,22 @@ module data_processor(
     input CLK,
     input clr,
     input en,
-    input [2:0] nb_bits,
+    input [NB_BITS_WIDTH-1:0] nb_bits,
     input [7:0] next_byte,
     output [7:0] data_out,
     output fetch
     );
     
+    parameter NB_BITS_WIDTH = 2;
+    
     wire [2:0] free_bits;
     wire [15:0] new_bits;
-    wire [2:0] nb_bits_del;
+    wire [NB_BITS_WIDTH-1:0] nb_bits_del;
     wire [7:0] buff_out;
     
-    //clr sets value nb_bits for the first state
-    dec_bits_counter #(.N(3)) dec_bits_counter_inst(
+    //clr -> OFFSET
+    dec_bits_counter #(.OFFSET(0), .NB_BITS_WIDTH(NB_BITS_WIDTH)) 
+    dec_bits_counter_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
@@ -25,21 +28,23 @@ module data_processor(
         .free_bits(free_bits)
     );
     
-    fetch_evaluator fetch_evaluator_inst(
+    fetch_evaluator #(.NB_BITS_WIDTH(NB_BITS_WIDTH)) fetch_evaluator_inst(
         .nb_bits(nb_bits),
         .free_bits(free_bits),
         .fetch(fetch)
     );
     
-    dec_new_bits_evaluator dec_new_bits_evaluator_inst(
+    dec_new_bits_evaluator #(.NB_BITS_WIDTH(NB_BITS_WIDTH)) 
+    dec_new_bits_evaluator_inst(
         .next_byte(next_byte),
         .free_bits(free_bits),
         .nb_bits(nb_bits),
         .new_bits(new_bits)
     );
     
-    //clr sets value for the first state
-    nb_bits_register #(.N(3)) nb_bits_register_inst(
+    //clr -> N
+    nb_bits_register #(.N(0), .NB_BITS_WIDTH(NB_BITS_WIDTH)) 
+    nb_bits_register_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
@@ -47,7 +52,7 @@ module data_processor(
         .out(nb_bits_del)
     );
     
-    dec_buffer dec_buffer_inst(
+    dec_buffer #(.NB_BITS_WIDTH(NB_BITS_WIDTH)) dec_buffer_inst(
         .CLK(CLK),
         .clr(clr),
         .en(!fetch),
@@ -56,7 +61,7 @@ module data_processor(
         .data_out(buff_out)
     );
     
-    bits_validator bits_validator_inst(
+    bits_validator #(.NB_BITS_WIDTH(NB_BITS_WIDTH)) bits_validator_inst(
         .data_in(buff_out),
         .nb_bits(nb_bits_del),
         .data_out(data_out)

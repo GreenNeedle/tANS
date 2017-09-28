@@ -5,7 +5,9 @@ module decoder(
     input CLK,
     input clr,
     input en,
+    input preset,
     input [7:0] next_byte,
+    input [R-1:0] init_state,
     output [7:0] symbol,
     output [R-1:0] state,
     output fetch
@@ -17,7 +19,9 @@ module decoder(
         .CLK(CLK),
         .clr(clr),
         .en(en),
+        .preset(preset),
         .next_byte(next_byte),
+        .init_state(init_state),
         .state(state),
         .fetch(fetch)
     );
