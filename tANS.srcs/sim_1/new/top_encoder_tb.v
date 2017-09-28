@@ -11,52 +11,28 @@ module top_encoder_tb();
     wire [7:0] symbols_count;
     wire [4:0] last_state;
     
-    integer h_all, h_bin;
+    integer debug, h_wb_data, h_rb_symbols, r_symbols;
+    
+    reg [7:0] mem [0:9];
+    
+    integer i;
     
     initial begin
-        h_all = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dump_all.txt");
-        h_bin = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dump_bin.dmp", "wb");
+        debug = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dump_all.txt");
+        h_wb_data = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dump_bin.dmp", "wb");
+        h_rb_symbols = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/symbols.dmp", "rb");
+        r_symbols = $fread(mem[0], h_rb_symbols);
         CLK <= 1;
         clr <= 1;
         en <= 1;
-        symbol <= 8'b00110010;
         
         #3 clr <= 0;
         #7
         
-        @ (posedge CLK)
-        symbol <= 8'b00110001;
-        
-        @ (posedge CLK)
-        symbol <= 8'b00110010;
-        
-        @ (posedge CLK)
-        symbol <= 8'b00110001;
-        
-        @ (posedge CLK)
-        symbol <= 8'b00110001;
-        
-        @ (posedge CLK)
-        symbol <= 8'b00110000;
-        
-        @ (posedge CLK)
-        symbol <= 8'b00110010;
-        
-        @ (posedge CLK)
-        symbol <= 8'b00110001;
-        
-        @ (posedge CLK)
-        symbol <= 8'b00110010;
-        
-        @ (posedge CLK)
-        symbol <= 8'b00110000;
-        
-        @ (posedge CLK)
-        en <= 0;
-        
-        #30
-        $fclose(h_all);
-        $fclose(h_bin);
+        #120
+        $fclose(debug);
+        $fclose(h_wb_data);
+        $fclose(h_rb_symbols);
         $finish;
     end
     
@@ -64,8 +40,17 @@ module top_encoder_tb();
         #5 CLK = ~CLK;
     end
     
+    initial begin
+        for (i = 0 ; i < 10; i = i + 1) begin
+            @ (posedge CLK)
+            symbol <= mem[i];
+        end
+        @ (posedge CLK)
+        en <= 0;
+    end
+    
     always @ (posedge CLK) begin
-        $fwrite(h_all, "symbol %c ", symbol, 
+        $fwrite(debug, "symbol %c ", symbol, 
                        "data_out %b ", data_out,
                        "byte_done %b ", byte_done,
                        "symbols_done %b ", symbols_done,
@@ -73,11 +58,11 @@ module top_encoder_tb();
                        "symbols_count %d ", symbols_count,
                        "last_state %d\n", last_state);
     if (byte_done || symbols_done) begin
-        $fwrite(h_bin, "%c", data_out);
+        $fwrite(h_wb_data, "%c", data_out);
     end
     if (symbols_done) begin
-        $fwrite(h_bin, "%c", valid_bits,
-                       "%c", last_state);
+        $fwrite(h_wb_data, "%c", valid_bits,
+                           "%c", last_state);
     end    
     end
     
