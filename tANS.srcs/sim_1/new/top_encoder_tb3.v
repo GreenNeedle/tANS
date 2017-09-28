@@ -11,7 +11,12 @@ module top_encoder_tb3();
     wire [7:0] symbols_count;
     wire [5:0] last_state;
     
+    integer handle;
+    integer h_bin;
+    
     initial begin
+        handle = $fopen("dump_all.txt");
+        h_bin = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS/data.dmp", "wb");
         CLK <= 1;
         clr <= 1;
         en <= 1;
@@ -69,6 +74,8 @@ module top_encoder_tb3();
         en <= 0;
         
         #30
+        $fclose(handle);
+        $fclose(h_bin);
         $finish;
     end
     
@@ -76,7 +83,23 @@ module top_encoder_tb3();
         #5 CLK = ~CLK;
     end
     
-    top_encoder #(.R(5), .MAX(15)) top_encoder_inst(
+    always @ (posedge CLK) begin
+        $fwrite(handle, "symbol %c ", symbol, 
+                        "data_out %b ", data_out,
+                        "byte_done %b ", byte_done,
+                        "symbols_done %b ", symbols_done,
+                        "valid_bits %d ", valid_bits,
+                        "symbols_count %d ", symbols_count,
+                        "last_state %d\n", last_state);
+        if (byte_done || symbols_done) begin
+            $fwrite(h_bin, "%c", data_out);
+        end
+        if (symbols_done) begin
+            $fwrite(h_bin, "%c", valid_bits);
+        end
+    end
+    
+    top_encoder #(.R(5), .S(32), .MAX(15)) top_encoder_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
