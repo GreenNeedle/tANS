@@ -8,6 +8,7 @@ module dec_state_machine(
     input preset,
     input [7:0] next_byte,
     input [R-1:0] init_state,
+    input [15:0] init_buff,
     output [R-1:0] state,
     output fetch
     );
@@ -37,6 +38,8 @@ module dec_state_machine(
         .CLK(CLK),
         .clr(clr),
         .en(en),
+        .preset(preset),
+        .init_buff(init_buff),
         .nb_bits(nb_bits),
         .state(state),
         .next_byte(next_byte),

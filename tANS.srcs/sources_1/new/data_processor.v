@@ -5,6 +5,7 @@ module data_processor(
     input CLK,
     input clr,
     input en,
+    input [15:0] init_buff,
     input [NB_BITS_WIDTH-1:0] nb_bits,
     input [7:0] next_byte,
     output [7:0] data_out,
@@ -56,6 +57,7 @@ module data_processor(
         .CLK(CLK),
         .clr(clr),
         .en(!fetch),
+        .init_buff(init_buff),
         .nb_bits(nb_bits),
         .new_bits(new_bits),
         .data_out(buff_out)
