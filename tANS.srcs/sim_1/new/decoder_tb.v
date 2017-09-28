@@ -54,6 +54,7 @@ module decoder_tb();
         $fwrite(h_wb_symbols, "%c", symbol);
         $fclose(debug);
         $fclose(h_wb_symbols);
+        $fclose(h_rb_data);
         $finish;
     end
     
