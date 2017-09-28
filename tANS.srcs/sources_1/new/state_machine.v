@@ -11,6 +11,7 @@ module state_machine(
     );
     
     parameter R = 4;
+    parameter S = 16;
     
     wire [7:0] start;
     wire [R:0] next_state;
@@ -33,7 +34,7 @@ module state_machine(
         .state(next_state)
     );
     
-    register #(.R(R), .S(32)) state_reg(
+    register #(.R(R), .S(S)) state_reg(
         .CLK(CLK),
         .clr(clr),
         .en(en),

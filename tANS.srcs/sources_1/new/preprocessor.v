@@ -12,6 +12,7 @@ module preprocessor(
     );
     
     parameter R = 4;
+    parameter S = 16;
     
     wire [7:0] nb;
     
@@ -31,7 +32,7 @@ module preprocessor(
         .data_valid(data_valid)
     );
     
-    state_machine #(.R(R)) state_machine_inst(
+    state_machine #(.R(R), .S(S)) state_machine_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

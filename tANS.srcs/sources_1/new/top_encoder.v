@@ -15,6 +15,7 @@ module top_encoder(
     );
     
     parameter R = 4;
+    parameter S = 16;
     parameter MAX = 9; //how many symbols will be processed - 1
     
     wire done;
@@ -27,7 +28,7 @@ module top_encoder(
         .symbols_done(done)
     );
     
-    encoder #(.R(R)) encoder_inst(
+    encoder #(.R(R), .S(S)) encoder_inst(
         .CLK(CLK),
         .clr(clr),
         .en(!done),

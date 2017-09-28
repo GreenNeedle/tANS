@@ -14,11 +14,12 @@ module encoder(
     );
     
     parameter R = 4;
+    parameter S = 16;
     
     wire [7:0] data_valid;
     wire [2:0] nb_bits;
     
-    preprocessor #(.R(R)) preprocessor_inst(
+    preprocessor #(.R(R), .S(S)) preprocessor_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
