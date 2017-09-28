@@ -13,9 +13,11 @@ module test_m_3_L_16_tb();
     
     integer enc_debug, enc_h_wb_data, enc_h_rb_symbols, enc_r_symbols;
     
-    reg [7:0] enc_mem [0:9];
+    reg [7:0] enc_mem [0:19];
     
     integer i;
+    integer j;
+    integer x;
     
     reg dec_clr, dec_en, dec_preset;
     reg [7:0] dec_next_byte;
@@ -28,13 +30,20 @@ module test_m_3_L_16_tb();
     
     integer dec_debug, dec_h_wb_symbols, dec_h_rb_data, dec_r_data;
     
-    reg [7:0] dec_mem [0:4];
+    reg [7:0] dec_mem [0:6];
     
     integer fix1, fix2, fix3;
     
     always begin
         #5 CLK = ~CLK;
     end
+    
+    initial begin
+     #220
+               $fclose(enc_debug);
+               $fclose(enc_h_wb_data);
+               $fclose(enc_h_rb_symbols); 
+      end         
     
     initial begin
         enc_debug = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dump_all.txt");
@@ -50,68 +59,31 @@ module test_m_3_L_16_tb();
         dec_preset <= 0;
         
         #3 enc_clr <= 0;
-        #7
         
-        #120
-        $fclose(enc_debug);
-        $fclose(enc_h_wb_data);
-        $fclose(enc_h_rb_symbols);
-        
-        if (enc_symbols_done) begin
-            fix1 = $fopen("/home/joanna/Pulpit/fix1.txt");
-            fix2 = $fopen("/home/joanna/Pulpit/fix2.dmp", "wb");
-            fix3 = $fopen("/home/joanna/Pulpit/fix3.dmp", "rb");
-            dec_debug = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/debug_symbols.txt");
-            dec_h_wb_symbols = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dec_symbols.dmp", "wb");
-            dec_h_rb_data = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dump_bin.dmp", "rb");
-            dec_r_data = $fread(dec_mem[0], dec_h_rb_data);
-            
-            #9
-            dec_clr <= 1;
-            dec_preset <= 1;
-            dec_next_byte <= 8'b11111111; //not used in testbench
-            dec_init_state <= dec_mem[4] - 16;
-            dec_init_buff <= {dec_mem[1], dec_mem[0]};
-            if (dec_mem[2] == 0) begin
-                dec_offset <= 8 - dec_mem[3];
-            end
-            else begin
-                dec_offset <= 0;
-            end
-            #7
-            
-            dec_clr <= 0;
-            dec_en <= 1; 
-            
-            @ (posedge CLK)
-            dec_preset <= 0;
-            
-            #100
-            
-            dec_en <= 0;
-            
-            #20
-            
-            #50
-            
-            //@ (posedge CLK)
-            //$fwrite(dec_debug, "symbol %b\n", dec_symbol_out);
-            //$fwrite(dec_h_wb_symbols, "%c", dec_symbol_out);
-            $fclose(dec_debug);
-            $fclose(dec_h_wb_symbols);
-            $fclose(dec_h_rb_data);
-            $finish;
-        end
     end
     
     initial begin
-        for (i = 0 ; i < 10; i = i + 1) begin
+        for (i = 0 ; i < 20; i = i + 1) begin
             @ (posedge CLK)
             enc_symbol_in <= enc_mem[i];
         end
         @ (posedge CLK)
         enc_en <= 0;
     end
+    
+//      initial begin
+//          for (j = 4 ; j >0; j = j - 1) begin
+//              @(posedge dec_fetch)
+              
+//              x=77;
+//          end
+         
+//      end
+
+initial begin
+#280 dec_next_byte <= dec_mem[1];
+#60 dec_next_byte <= dec_mem[0];
+end
     
     always @ (posedge CLK) begin
         $fwrite(enc_debug, "symbol %c ", enc_symbol_in, 
@@ -121,17 +93,20 @@ module test_m_3_L_16_tb();
                            "valid_bits %d ", enc_valid_bits,
                            "symbols_count %d ", enc_symbols_count,
                            "last_state %d\n", enc_state);
-        if (enc_byte_done || enc_symbols_done) begin
+        if (enc_byte_done) begin
             $fwrite(enc_h_wb_data, "%c", enc_data_out);
-        end
-        if (enc_symbols_done) begin
-            $fwrite(enc_h_wb_data, "%c", enc_byte_done,
-                                   "%c", enc_valid_bits,
-                                   "%c", enc_state);
         end    
     end
     
-    top_encoder top_encoder_inst(
+    always @ (posedge enc_symbols_done) begin
+        #5
+        $fwrite(enc_h_wb_data, "%c", enc_data_out,
+                               "%c", enc_byte_done,
+                               "%c", enc_valid_bits,
+                               "%c", enc_state);
+    end
+    
+    top_encoder #(.MAX(19)) top_encoder_inst(
         .CLK(CLK),
         .clr(enc_clr),
         .en(enc_en),
@@ -143,6 +118,70 @@ module test_m_3_L_16_tb();
         .symbols_count(enc_symbols_count),
         .last_state(enc_state)
     );
+    
+    always @ (posedge enc_symbols_done) begin
+        #30
+        fix1 = $fopen("/home/joanna/Pulpit/fix1.txt");
+        fix2 = $fopen("/home/joanna/Pulpit/fix2.dmp", "wb");
+        fix3 = $fopen("/home/joanna/Pulpit/fix3.dmp", "rb");
+        dec_debug = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/debug_symbols.txt");
+        dec_h_wb_symbols = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dec_symbols.dmp", "wb");
+        dec_h_rb_data = $fopen("/home/joanna/Programowanie/FPGA/Projekty/tANS.tests/test_m_3_L_16/tANS/dump_bin.dmp", "rb");
+        dec_r_data = $fread(dec_mem[0], dec_h_rb_data);
+        
+        #9
+        dec_clr <= 1;
+        dec_preset <= 1;
+        dec_next_byte <= 8'b11111111; //not used in testbench
+        dec_init_state <= dec_mem[dec_r_data-1] - 16;
+        dec_init_buff <= {dec_mem[dec_r_data-4], dec_mem[dec_r_data-5]};
+        if (dec_mem[dec_r_data-3] == 0) begin
+            dec_offset <= 8 - dec_mem[dec_r_data-2];
+        end
+        else begin
+            dec_offset <= 0;
+        end
+        //j <= 2;
+        #7
+        
+        dec_clr <= 0;
+        dec_en <= 1; 
+        
+        @ (posedge CLK)
+        dec_preset <= 0;
+        
+        #300
+        
+        dec_en <= 0;
+        
+        #20
+        
+        #50
+        
+        //@ (posedge CLK)
+        //$fwrite(dec_debug, "symbol %b\n", dec_symbol_out);
+        //$fwrite(dec_h_wb_symbols, "%c", dec_symbol_out);
+        $fclose(dec_debug);
+        $fclose(dec_h_wb_symbols);
+        $fclose(dec_h_rb_data);
+        $finish;    
+    end
+    /*
+    always @ (posedge CLK) begin
+       
+        if(dec_fetch) begin
+            dec_next_byte <= dec_mem[j];
+                j <= j-1;
+           end
+      end
+      always @ (posedge dec_fetch) begin
+        if(dec_fetch) 
+            j = j+1;
+      
+      
+      end*/
+                
+  
     
     always @ (posedge CLK) begin
         if (dec_en) begin

@@ -99,7 +99,7 @@ module top_encoder_tb3();
         end
     end
     
-    top_encoder #(.R(5), .S(32), .MAX(15)) top_encoder_inst(
+    top_encoder #(.R(5), .MAX(15)) top_encoder_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
