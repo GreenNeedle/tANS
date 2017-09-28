@@ -57,13 +57,14 @@ module top_encoder_tb();
                        "valid_bits %d ", valid_bits,
                        "symbols_count %d ", symbols_count,
                        "last_state %d\n", last_state);
-    if (byte_done || symbols_done) begin
-        $fwrite(h_wb_data, "%c", data_out);
-    end
-    if (symbols_done) begin
-        $fwrite(h_wb_data, "%c", valid_bits,
-                           "%c", last_state);
-    end    
+        if (byte_done || symbols_done) begin
+            $fwrite(h_wb_data, "%c", data_out);
+        end
+        if (symbols_done) begin
+            $fwrite(h_wb_data, "%c", byte_done,
+                               "%c", valid_bits,
+                               "%c", last_state);
+        end    
     end
     
     top_encoder top_encoder_inst(

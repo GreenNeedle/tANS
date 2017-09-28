@@ -6,6 +6,7 @@ module decoder(
     input clr,
     input en,
     input preset,
+    input [3:0] initial_offset,
     input [7:0] next_byte,
     input [R-1:0] init_state,
     input [15:0] init_buff,
@@ -15,13 +16,13 @@ module decoder(
     );
     
     parameter R = 4;
-    parameter OFFSET = 0;
     
-    dec_state_machine #(.R(R), .OFFSET(OFFSET)) dec_state_machine_inst(
+    dec_state_machine #(.R(R)) dec_state_machine_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
         .preset(preset),
+        .initial_offset,
         .next_byte(next_byte),
         .init_state(init_state),
         .init_buff(init_buff),

@@ -5,6 +5,7 @@ module dec_buffer(
     input CLK,
     input clr,
     input en,
+    input [3:0] initial_offset,
     input [15:0] init_buff,
     input [NB_BITS_WIDTH-1:0] nb_bits,
     input [15:0] new_bits,
@@ -12,7 +13,6 @@ module dec_buffer(
     );
     
     parameter NB_BITS_WIDTH = 2;
-    parameter OFFSET = 0;
     
     reg [15:0] buff;
     reg [7:0] data_out;
@@ -29,7 +29,7 @@ module dec_buffer(
             //data_out <= 8'b11100001; //tb1: m=3, L=16
             //data_out <= 8'b11001110; //tb2: m=4, L=16
             //data_out <= 8'b00010110; //tb3: m=8, L=32
-            buff <= init_buff << OFFSET;
+            buff <= init_buff << initial_offset;
             data_out <= 8'b00000000;
         end
         else if (en) begin

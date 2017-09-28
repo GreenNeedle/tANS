@@ -5,18 +5,18 @@ module dec_bits_counter(
     input CLK,
     input clr,
     input en,
+    input [3:0] initial_offset,
     input [NB_BITS_WIDTH-1:0] nb_bits,
     output [2:0] free_bits
     );
     
     parameter NB_BITS_WIDTH = 2;
-    parameter OFFSET = 3'b000;
     
     reg [2:0] k;
     
     always @ (posedge CLK) begin
         if (clr) begin
-            k[2:0] <= OFFSET;
+            k[2:0] <= initial_offset;
         end
         else if (en) begin
             k[2:0] <= k[2:0] + nb_bits;

@@ -6,6 +6,7 @@ module dec_state_machine(
     input clr,
     input en,
     input preset,
+    input [3:0] initial_offset,
     input [7:0] next_byte,
     input [R-1:0] init_state,
     input [15:0] init_buff,
@@ -15,7 +16,6 @@ module dec_state_machine(
     
     parameter R = 4;
     parameter NB_BITS_WIDTH = 2;
-    parameter OFFSET = 0;
     
     wire [R-1:0] next_state;
     wire [NB_BITS_WIDTH-1:0] nb_bits;
@@ -34,11 +34,12 @@ module dec_state_machine(
         .nb_bits(nb_bits)
     );
     
-    dec_preprocessor #(.R(R), .NB_BITS_WIDTH(NB_BITS_WIDTH), .OFFSET(OFFSET)) 
+    dec_preprocessor #(.R(R), .NB_BITS_WIDTH(NB_BITS_WIDTH)) 
     dec_preprocessor_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
+        .initial_offset(initial_offset),
         .init_buff(init_buff),
         .nb_bits(nb_bits),
         .state(state),
