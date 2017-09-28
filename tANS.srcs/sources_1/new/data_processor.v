@@ -13,6 +13,7 @@ module data_processor(
     );
     
     parameter NB_BITS_WIDTH = 2;
+    parameter OFFSET = 0;
     
     wire [2:0] free_bits;
     wire [15:0] new_bits;
@@ -20,7 +21,7 @@ module data_processor(
     wire [7:0] buff_out;
     
     //clr -> OFFSET
-    dec_bits_counter #(.OFFSET(0), .NB_BITS_WIDTH(NB_BITS_WIDTH)) 
+    dec_bits_counter #(.OFFSET(OFFSET), .NB_BITS_WIDTH(NB_BITS_WIDTH)) 
     dec_bits_counter_inst(
         .CLK(CLK),
         .clr(clr),
@@ -53,7 +54,7 @@ module data_processor(
         .out(nb_bits_del)
     );
     
-    dec_buffer #(.NB_BITS_WIDTH(NB_BITS_WIDTH)) dec_buffer_inst(
+    dec_buffer #(.NB_BITS_WIDTH(NB_BITS_WIDTH), .OFFSET(OFFSET)) dec_buffer_inst(
         .CLK(CLK),
         .clr(clr),
         .en(!fetch),

@@ -18,7 +18,7 @@ module decoder_tb();
         preset <= 1;
         next_byte <= 8'b11111111; //not used in testbench
         init_state <= 9;
-        init_buff <= 16'b1110000110101000;
+        init_buff <= 16'b0111000011010100;
         #3
         
         clr <= 0;
@@ -36,7 +36,7 @@ module decoder_tb();
         #5 CLK = ~CLK;
     end
     
-    decoder decoder_inst(
+    decoder #(.OFFSET(1)) decoder_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),

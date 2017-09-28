@@ -15,8 +15,9 @@ module decoder(
     );
     
     parameter R = 4;
+    parameter OFFSET = 0;
     
-    dec_state_machine #(.R(R)) dec_state_machine_inst(
+    dec_state_machine #(.R(R), .OFFSET(OFFSET)) dec_state_machine_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
