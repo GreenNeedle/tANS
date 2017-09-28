@@ -16,8 +16,9 @@ module decoder(
     );
     
     parameter R = 4;
+    parameter NB_BITS_WIDTH = 2;
     
-    dec_state_machine #(.R(R)) dec_state_machine_inst(
+    dec_state_machine #(.R(R), .NB_BITS_WIDTH(NB_BITS_WIDTH)) dec_state_machine_inst(
         .CLK(CLK),
         .clr(clr),
         .en(en),
